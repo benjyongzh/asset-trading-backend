@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: service-registry
+  cloud:
+    config:
+      import-check:
+        enabled: false
 
 eureka:
   instance:
