@@ -1,4 +1,4 @@
-package com.tradingapp.trading_service.models;
+package com.tradingapp.reporting_service.models;
 
 import java.time.LocalDateTime;
 

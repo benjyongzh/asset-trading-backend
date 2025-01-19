@@ -35,3 +35,7 @@ spring:
           uri: lb://order-matching-engine
           predicates:
             - Path=/ordermatchingengine/**
+        - id: reporting-service
+          uri: lb://reporting-service
+          predicates:
+            - Path=/reports/**

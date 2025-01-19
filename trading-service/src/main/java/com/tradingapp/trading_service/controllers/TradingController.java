@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/trades")
@@ -31,22 +32,34 @@ public class TradingController {
     private OrderClient orderClient;
 
     @GetMapping
-    public List<Trade> findAllTrades(){
+    public List<Trade> findAll(){
         LOGGER.info("trade findAll");
         return tradeRepository.findAll();
     }
+
+//    @GetMapping("/filter")
+//    public List<Trade> filterAll(@RequestParam(name="assetid",required = false) Long assetId,
+//                                 @RequestParam(name="currency", required = false) String currencyName){
+//        return tradeRepository.findAll().stream()
+//                .filter(item -> (assetId == null || assetId.equals(getAssetId(item))))
+//                .filter(item -> (currencyName == null || currencyName.equals(getCurrency(item))))
+//                .collect(Collectors.toList());
+//    };
+//
+//    public Long getAssetId(Trade trade){
+//
+//    }
+//
+//    public String getCurrency(Trade trade){
+//
+//    }
+
 
     @GetMapping("/{id}")
     public Trade findById(@PathVariable Long id){
         LOGGER.info("trade findById: {}", id);
         return tradeRepository.findById(id);
     }
-
-//    @GetMapping("/orders")
-//    public List<Order> findAllOrders(){
-//        LOGGER.info("order findAll");
-//        return orderClient.findAll();
-//    }
 
     @PostMapping("/add")
     public ResponseEntity<String> addTrade(@RequestBody TradeDTO tradeDTO){
