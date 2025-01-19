@@ -37,9 +37,9 @@ public class UserController {
     }
 
 
-    @PostMapping("/validateuserbycode/{userCode}")
-    public boolean validateUserByCode(@PathVariable String userCode){
-        LOGGER.info("user validateByCode: {}", userCode);
+    @PostMapping("/validateuserbycode")
+    public boolean validateUserByCode(@RequestParam(name="usercode") String userCode){
+        LOGGER.info("user validateUserByCode: {}", userCode);
         return userRepository.validateUserByCode(userCode);
     }
 

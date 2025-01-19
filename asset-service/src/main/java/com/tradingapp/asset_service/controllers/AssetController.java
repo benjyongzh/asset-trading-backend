@@ -35,15 +35,15 @@ public class AssetController {
         return assetRepository.findAll();
     }
 
-    @GetMapping("/byid/{id}")
+    @GetMapping("/{id}")
     public Asset findById(@PathVariable Long id){
         LOGGER.info("asset findById: {}", id);
         return assetRepository.findById(id);
     }
 
-    @PostMapping("/validateassetoforder/{assetCode}")
-    public boolean validateAssetOfOrder(@PathVariable String assetCode, Integer orderQuantity){
-        LOGGER.info("asset validateassetoforder: {}", assetCode);
+    @PostMapping("/validateassetoforder")
+    public boolean validateAssetOfOrder(@RequestParam(name="assetcode") String assetCode, @RequestParam(name="orderquantity") Integer orderQuantity){
+        LOGGER.info("asset validateassetoforder: " + assetCode + ", orderquantity: " + orderQuantity);
         return assetImplementation.validateAssetOfOrder(assetCode, orderQuantity);
     }
 

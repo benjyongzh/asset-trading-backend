@@ -18,6 +18,8 @@ public class Order {
 
     private float amount;
 
+    public Order() {
+    }
 
     public Order(Long id, String clientCode, String orderType, String assetCode, Integer quantity, String currencyCode) {
         this.id = id;
@@ -119,3 +121,4 @@ public class Order {
                 '}';
     }
 }
+

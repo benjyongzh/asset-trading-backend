@@ -17,10 +17,33 @@ public class OrderRepository {
     }
 
     public Order findById(Long id){
-        return orders.stream().filter(orders -> orders.getId().equals(id)).findFirst().orElseThrow();
+        return orders.stream().filter(order -> order.getId().equals(id)).findFirst().orElseThrow();
     }
 
     public List<Order> findAll(){
         return orders;
     }
+
+    public String setOrderQuantity(Long id, Integer quantity){
+        // Find the object by its unique identifier
+        for (int i = 0; i < orders.size(); i++) {
+            Order currentOrder = orders.get(i);
+            if (currentOrder.getId().equals(id)) {
+                // Update the object at this index
+                Order updatedOrder = new Order(
+                        currentOrder.getId(),
+                        currentOrder.getDateTime(),
+                        currentOrder.getClientCode(),
+                        currentOrder.getOrderType(),
+                        currentOrder.getAssetCode(),
+                        quantity,
+                        currentOrder.getCurrencyCode(),
+                        currentOrder.getAmount());
+                orders.set(i, updatedOrder);
+                return "updated order:"  + updatedOrder.toString();
+            }
+        }
+        return "no orders updated.";
+    }
+
 }

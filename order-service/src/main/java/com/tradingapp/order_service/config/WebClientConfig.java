@@ -1,6 +1,7 @@
 package com.tradingapp.order_service.config;
 
 import com.tradingapp.order_service.client.AssetClient;
+import com.tradingapp.order_service.client.OrderMatchingEngineClient;
 import com.tradingapp.order_service.client.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancedExchangeFilterFunction;
@@ -26,7 +27,6 @@ public class WebClientConfig {
         return httpServiceProxyFactory.createClient(AssetClient.class);
     }
 
-
     @Bean
     public WebClient userWebClient(){
         return WebClient.builder().baseUrl("http://user-service").filter(filterFunction).build();
@@ -36,5 +36,17 @@ public class WebClientConfig {
     public UserClient userClient(){
         HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(userWebClient())).build();
         return httpServiceProxyFactory.createClient(UserClient.class);
+    }
+
+
+    @Bean
+    public WebClient orderMatchingEngineWebClient(){
+        return WebClient.builder().baseUrl("http://order-matching-engine").filter(filterFunction).build();
+    }
+
+    @Bean
+    public OrderMatchingEngineClient orderMatchingEngineClient(){
+        HttpServiceProxyFactory httpServiceProxyFactory = HttpServiceProxyFactory.builderFor(WebClientAdapter.create(orderMatchingEngineWebClient())).build();
+        return httpServiceProxyFactory.createClient(OrderMatchingEngineClient.class);
     }
 }

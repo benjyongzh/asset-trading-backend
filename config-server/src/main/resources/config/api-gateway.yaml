@@ -27,3 +27,11 @@ spring:
           uri: lb://asset-service
           predicates:
             - Path=/assets/**
+        - id: trading-service
+          uri: lb://trading-service
+          predicates:
+            - Path=/trades/**
+        - id: order-matching-engine
+          uri: lb://order-matching-engine
+          predicates:
+            - Path=/ordermatchingengine/**

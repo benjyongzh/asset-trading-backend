@@ -1,7 +1,5 @@
 package com.tradingapp.user_service.models;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 
 public class Order {
@@ -20,6 +18,8 @@ public class Order {
 
     private float amount;
 
+    public Order() {
+    }
 
     public Order(Long id, String clientCode, String orderType, String assetCode, Integer quantity, String currencyCode) {
         this.id = id;
