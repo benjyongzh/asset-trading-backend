@@ -59,13 +59,13 @@ public class OrderController {
         if (orderIsValid){
             String addedOrder = orderRepository.addOrder(order).toString();
             orderImplementation.checkForViableTrades(order);
-            return new ResponseEntity<>(String.format("Order Added: %s", addedOrder),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(String.format("Order Added: %s", addedOrder),HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Order Declined. Invalid values entered.", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping("/{id}/update")
+    @PostMapping("/{id}/tradesetquantity")
     public ResponseEntity<String> setOrderQuantity(@PathVariable Long id, @RequestParam(name="quantity") Integer quantity){
         LOGGER.info("update order id " + id + ", newQuantity: " + quantity);
         return new ResponseEntity<>(orderRepository.setOrderQuantity(id, quantity),HttpStatus.ACCEPTED);

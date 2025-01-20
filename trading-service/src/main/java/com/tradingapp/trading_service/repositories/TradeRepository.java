@@ -11,8 +11,9 @@ public class TradeRepository {
 
     private List<Trade> trades = new ArrayList<>();
 
-    public void addTrade(Trade trade){
+    public Trade addTrade(Trade trade){
         trades.add(trade);
+        return trade;
     }
 
     public Trade findById(Long id){

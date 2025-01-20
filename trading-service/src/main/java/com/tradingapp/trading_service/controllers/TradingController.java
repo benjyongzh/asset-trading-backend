@@ -64,6 +64,11 @@ public class TradingController {
     @PostMapping("/add")
     public ResponseEntity<String> addTrade(@RequestBody TradeDTO tradeDTO){
         LOGGER.info("new trade: {}", tradeDTO);
-        return new ResponseEntity<>(tradeImplementation.executeTrade(tradeDTO), HttpStatus.ACCEPTED);
+        try {
+            Trade tradeExecuted = tradeImplementation.executeTrade(tradeDTO);
+            return new ResponseEntity<>("Trade executed successfully.", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Trade could not be created. Server error.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

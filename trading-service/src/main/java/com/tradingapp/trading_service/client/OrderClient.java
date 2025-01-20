@@ -17,7 +17,7 @@ public interface OrderClient {
     @GetExchange("/orders")
     public List<Order> findAll();
 
-    @PostExchange("/orders/{id}/update")
+    @PostExchange("/orders/{id}/tradesetquantity")
     public String setOrderQuantity(@PathVariable Long id, @RequestParam(name="quantity") Integer quantity);
 
 }

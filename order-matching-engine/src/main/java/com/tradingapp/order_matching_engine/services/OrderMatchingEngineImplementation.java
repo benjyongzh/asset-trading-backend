@@ -73,10 +73,8 @@ public class OrderMatchingEngineImplementation {
             newTrade.setSellOrderId(order.getId());
         }
 
-        String tradeId = tradeClient.addTrade(newTrade);
-//        Trade trade = tradeClient.findById(Long.valueOf(tradeId));
+        String executedTrade = tradeClient.addTrade(newTrade);
         Order updatedOrder = orderClient.findById(order.getId());
-
 
         //recursive
         checkForViableTrades(updatedOrder);

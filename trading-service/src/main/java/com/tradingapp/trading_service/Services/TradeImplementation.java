@@ -34,7 +34,7 @@ public class TradeImplementation {
         return trade;
     }
 
-    public String executeTrade(TradeDTO tradeDTO){
+    public Trade executeTrade(TradeDTO tradeDTO) throws Exception{
         Trade trade = createTradeObject(tradeDTO);
         Integer quantity = trade.getQuantity();
         LOGGER.info("trade quantity: {}", quantity);
@@ -46,9 +46,7 @@ public class TradeImplementation {
         Integer newQuantityForSell = sellOrder.getQuantity() - quantity;
         orderClient.setOrderQuantity(buyOrder.getId(), newQuantityForBuy);
         orderClient.setOrderQuantity(sellOrder.getId(), newQuantityForSell);
-        tradeRepository.addTrade(trade);
-        LOGGER.info("trade executed: {}", trade);
-        return trade.getId().toString();
+        return tradeRepository.addTrade(trade);
     }
 
 }
